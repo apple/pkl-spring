@@ -1,0 +1,5 @@
+name: spring
+title: Spring Boot Integration
+version: 0.15.0
+nav:
+- nav.adoc

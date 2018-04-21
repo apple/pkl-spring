@@ -1,0 +1,2 @@
+org.springframework.boot.env.PropertySourceLoader=org.pkl.spring.boot.PklPropertySourceLoader
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=org.pkl.spring.boot.PklAutoConfiguration

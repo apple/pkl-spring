@@ -1,0 +1,36 @@
+= Installation
+
+The _pkl-spring_ library is hosted on Maven Central.
+
+_pkl-spring_ requires Java 11 or higher and Spring Boot 2.2 or higher.
+Note that _pkl-spring_'s POM does not declare a dependency on Spring Boot; this is left to your application.
+
+== Gradle
+
+Add this to your _build.gradle_:
+
+[source,groovy,subs="+attributes"]
+----
+dependencies {
+  compile "org.pkl-lang:pkl-spring:{page-version}"
+}
+----
+
+See the badges at the top of this page for the current release and latest snapshot version.
+
+== Maven
+
+Add this to your _pom.xml_:
+
+[source,xml,subs="+attributes"]
+----
+<dependencies>
+  <dependency>
+    <groupId>org.pkl-lang</groupId>
+    <artifactId>pkl-spring</artifactId>
+    <version>{page-version}</version>
+  </dependency>
+</dependencies>
+----
+
+See the badges at the top of this page for the current release and latest snapshot version.

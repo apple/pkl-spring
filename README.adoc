@@ -1,0 +1,30 @@
+= Pkl Spring Boot Integration image:https://circleci.com/gh/apple/pkl-spring.svg?style=svg["pkl-spring", link="https://circleci.com/gh/apple/pkl-spring"]
+:uri-docs: https://pkl-lang.org/spring/current
+:uri-installation: {uri-docs}/installation
+:uri-usage: {uri-docs}/usage
+
+_pkl-spring_ is a Spring Boot extension for configuring Boot apps with Pkl.
+
+Because _pkl-spring_ plugs into Spring Boot's standard configuration mechanism,
+configuring your Boot apps with Pkl works much the same as configuring them with Java properties or YAML.
+
+Continue with {uri-installation}[installation] and {uri-usage}[usage instructions].
+
+== Development
+
+=== Setup
+
+* Install JDK 11
+* Install the latest IntelliJ IDEA
+** To import the project into IntelliJ, go to File->Open and select the project's root directory.
+If the project is opened but not imported, look for a popup in the lower right corner
+and click its "Import Gradle Project" link.
+
+=== Common Build Commands
+
+[source,shell]
+----
+./gradlew test
+./gradlew build
+cd samples && ./gradlew build
+----

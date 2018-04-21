@@ -1,0 +1,158 @@
+module org.pkl.spring.boot.AppConfig
+
+intProp: Int = 42
+
+int32: Int32 = -42
+
+floatProp: Float = 1.23
+
+booleanProp: Boolean = true
+
+string: String = "string"
+
+duration: Duration = 3.h
+
+dataSize: DataSize = 1.23.gb
+
+pair: Pair<String, Boolean> = Pair("hello", true)
+
+regex: Regex = Regex("regex")
+
+simpleList: List<String> = List("Pigeon", "Parrot")
+
+simpleEmptyList: List<String> = List()
+
+simpleSet: Set<String> = Set("Pigeon", "Parrot")
+
+simpleEmptySet: Set<String> = Set()
+
+simpleMap: Map<String, Int> = Map("Pigeon", 42, "Parrot", 21)
+
+simpleEmptyMap: Map<String, Int> = Map()
+
+simpleListing: Listing<String> = new { "Pigeon"; "Parrot" }
+
+simpleEmptyListing: Listing<String> = new {}
+
+simpleMapping: Mapping<String, Int> = new { ["Pigeon"] = 42; ["Parrot"] = 21 }
+
+simpleEmptyMapping: Mapping<String, Int> = new {}
+
+complexList: List<Person> = List(
+  new Person { name = "Pigeon"; age = 42 },
+  new Person { name = "Parrot"; age = 21})
+
+complexEmptyList: List<Person> = List()
+
+complexSet: Set<Person> = Set(
+  new Person { name = "Pigeon"; age = 42 },
+  new Person { name = "Parrot"; age = 21})
+
+complexEmptySet: Set<Person> = Set()
+
+complexMap: Map<String, Person> = Map(
+    "Pigeon", new Person { name = "Pigeon"; age = 42 },
+    "Parrot", new Person { name = "Parrot"; age = 21})
+
+complexEmptyMap: Map<String, Person> = Map()
+
+complexListing: Listing<Person> = new {
+  new { name = "Pigeon"; age = 42 }
+  new { name = "Parrot"; age = 21 }
+}
+
+complexEmptyListing: Listing<Person> = new {}
+
+complexMapping: Mapping<String, Person> = new {
+  ["Pigeon"] { name = "Pigeon"; age = 42 }
+  ["Parrot"] { name = "Parrot"; age = 21 }
+}
+
+complexEmptyMapping: Mapping<String, Person> = new {}
+
+dynamicPigeon: Dynamic = new {
+  name = "Pigeon"
+  age = 42
+  addresses {
+    new {
+      street = "Wilmore St."
+      zip = 94102
+    }
+    new {
+      street = "Leisure St."
+      zip = 93118
+    }
+  }
+}
+
+dynamicParrot: Dynamic = (dynamicPigeon) {
+  name = "Parrot"
+  age = 21
+}
+
+typedPigeon: Person = new {
+  name = "Pigeon"
+  age = 42
+  addresses {
+    new {
+      street = "Wilmore St."
+      zip = 94102
+    }
+    new {
+      street = "Leisure St."
+      zip = 93118
+    }
+  }
+}
+
+typedParrot: Person = (typedPigeon) {
+  name = "Parrot"
+  age = 21
+}
+
+nullableInt1: Int? = 42
+
+nullableInt2: Int? = null
+
+nullableString1: String? = "string"
+
+nullableString2: String? = null
+
+nullablePigeon1: Person? = typedPigeon
+
+nullablePigeon2: Person? = null
+
+listWithNullElements: List<String?> = List("elem1", "elem2")
+
+setWithNullElements: Set<String?> = Set("elem1", "elem2")
+
+mapWithNullElements: Map<Int, String?> = Map(0, "elem1", 1, null, 2, "elem2", 3, null)
+
+listingWithNullElements: Listing<String?> = new {
+  "elem1"
+  "elem2"
+}
+
+mappingWithNullElements: Mapping<Int, String?> = new {
+  [0] = "elem1"
+  [1] = null
+  [2] = "elem2"
+  [3] = null
+}
+
+size: Size = "SMALL"
+
+class Person {
+  name: String
+  age: Int
+  addresses: Listing<Address>
+}
+
+class Address {
+  street: String
+  zip: Int
+}
+
+typealias Size = "SMALL"|"MEDIUM"|"LARGE"
+
+class EmptyObject

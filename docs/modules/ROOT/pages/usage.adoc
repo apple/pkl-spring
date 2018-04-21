@@ -1,0 +1,175 @@
+= Usage
+
+:uri-externalized-configuration: https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html
+:uri-type-safe-config-properties: https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config-typesafe-configuration-properties
+:uri-application-property-file: https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html#boot-features-external-config-application-property-files
+:uri-configuration-properties: https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/context/properties/ConfigurationProperties.html
+:uri-environment: https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/core/env/Environment.html
+:uri-boot-sample-sources: https://github.com/apple/pkl-spring/blob/main/samples/spring-boot
+:uri-kotlin-sample-sources: https://github.com/apple/pkl-spring/blob/main/samples/spring-boot-kotlin
+
+Let's walk through an example for configuring a Spring Boot application with Pkl.
+
+[NOTE]
+====
+The source code for this example is available on link:{uri-boot-sample-sources}[GitHub].
+The equivalent Kotlin example is link:{uri-kotlin-sample-sources}[here].
+
+For background information,
+see {uri-externalized-configuration}[Externalized Configuration],
+in particular {uri-type-safe-config-properties}[Type-safe Configuration Properties],
+in the Spring Boot documentation.
+====
+
+. [[schema]] Define a configuration xref:main:language-reference:index.adoc#classes[schema] in `src/main/resources`:
++
+[source,{pkl}]
+.AppConfig.pkl
+----
+// this module name determines the package and
+// class name of the generated Java config class
+module samples.boot.AppConfig
+
+server: Server
+
+class Server {
+  endpoints: Listing<Endpoint>
+}
+
+class Endpoint {
+  name: String
+  port: UInt16
+}
+----
+
+. Define an {uri-application-property-file}[Application Property File] next to the schema:
++
+[source,{pkl}]
+.application.pkl
+----
+amends "modulepath:/appConfig.pkl"
+
+server {
+  endpoints {
+    new {
+      name = "endpoint1"
+      port = 1234
+    }
+    new {
+      name = "endpoint2"
+      port = 5678
+    }
+  }
+}
+----
+
+. Use Pkl's xref:main:pkl-gradle:index.adoc[Gradle plugin] to generate Java config classes from the schema.
+Generated classes are placed in `generated/configClasses/` and compiled together with your production code.
+To run the generator directly (which isn't typically necessary), type `./gradlew configClasses`.
+
++
+[tabs]
+====
+Groovy::
++
+.build.gradle
+[source,groovy]
+----
+plugins {
+  id "org.pkl-lang" version "$pklVersion"
+}
+
+pkl {
+  javaCodeGenerators {
+    configClasses {
+      generateGetters.set(true)
+      generateSpringBootConfig.set(true)
+      sourceModules.set(files("src/main/resources/AppConfig.pkl"))
+    }
+  }
+}
+----
++
+.settings.gradle
+[source,groovy]
+----
+pluginManagement {
+  repositories {
+    mavenCentral()
+  }
+}
+----
+
+Kotlin::
++
+.build.gradle.kts
+[source,kotlin]
+----
+plugins {
+  id("org.pkl-lang") version "$pklVersion"
+}
+
+pkl {
+  javaCodeGenerators {
+    register("configClasses") {
+      generateGetters.set(true)
+      generateSpringBootConfig.set(true)
+      sourceModules.set(files("src/main/resources/AppConfig.pkl"))
+    }
+  }
+}
+----
++
+.settings.gradle.kts
+[source,kotlin]
+----
+pluginManagement {
+  repositories {
+    mavenCentral()
+  }
+}
+----
+====
+
+. Annotate your Boot application class with `@ConfigurationPropertiesScan`.
+(Alternatively, explicitly list configuration classes with `@EnableConfigurationProperties(...)`.)
++
+[source,java]
+----
+@SpringBootApplication
+@ConfigurationPropertiesScan
+public class Application { ... }
+----
+
+. Inject the generated config classes into your application's components as appropriate.
++
+[source,java]
+----
+@Service
+public class Server {
+  public Server(AppConfig.Server config) { ... }
+}
+----
+
+. To get access to the entire configuration, inject the `AppConfig` class itself:
++
+[source,java]
+----
+@Service
+public class Server {
+  public Server(AppConfig config) { ... }
+}
+----
+
+This example demonstrates one way of configuring Spring Boot applications with Pkl.
+Some possible deviations are:
+
+* Use multiple config files, for example one per environment.
+* Read config files from the file system instead of the class path.
+* Write config classes by hand instead of generating them.
+* Do not define a config schema. (Config classes cannot be generated in this case.)
+* Use a build tool other than Gradle.
+** Declare a build dependency on `pkl-codegen-java`.
+** Invoke the code generator's `main` method during the build, passing the required arguments.
+** Configure the build to compile generated config classes together with your production code.
+** For more information, see the xref:main:java-binding:codegen.adoc[Java code generator] docs.

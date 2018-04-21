@@ -1,0 +1,14 @@
+// this module name determines the package and
+// class name of the generated Java config class
+module samples.boot.AppConfig
+
+server: Server
+
+class Server {
+  endpoints: Listing<Endpoint>
+}
+
+class Endpoint {
+  name: String
+  port: UInt16
+}

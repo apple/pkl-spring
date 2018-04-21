@@ -1,0 +1,3 @@
+* xref:spring:ROOT:installation.adoc[Installation]
+* xref:spring:ROOT:changelog.adoc[Changelog]
+* xref:ROOT:usage.adoc[Usage]

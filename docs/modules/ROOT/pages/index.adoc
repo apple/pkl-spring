@@ -1,0 +1,11 @@
+= Spring Boot Integration
+:uri-issue: https://github.com/apple/pkl-spring/issues
+
+_pkl-spring_ is a Spring Boot extension for configuring Boot apps with Pkl.
+
+Because _pkl-spring_ plugs into Spring Boot's standard configuration mechanism,
+configuring your Boot app with Pkl works much the same as configuring it with Java properties or YAML.
+
+== Contact
+
+* Raise an {uri-issue}[Issue]

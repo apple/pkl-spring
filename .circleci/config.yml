@@ -1,0 +1,107 @@
+# Generated from CircleCI.pkl. DO NOT EDIT.
+version: '2.1'
+orbs:
+  pr-approval: apple/pr-approval@0.1.0
+jobs:
+  build:
+    steps:
+    - checkout
+    - run:
+        command: ./gradlew build
+        name: Building
+    docker:
+    - image: cimg/openjdk:11.0
+  deploy-release:
+    steps:
+    - checkout
+    - run:
+        command: ./gradlew -DreleaseBuild=true publishToSonatype closeAndReleaseSonatypeStagingRepository
+    docker:
+    - image: cimg/openjdk:11.0
+  deploy-snapshot:
+    steps:
+    - checkout
+    - run:
+        command: ./gradlew build publishToSonatype
+    docker:
+    - image: cimg/openjdk:11.0
+  github-release:
+    steps:
+    - run:
+        command: |-
+          gh release create "${CIRCLE_TAG}" \
+            --title "${CIRCLE_TAG}" \
+            --target "${CIRCLE_SHA1}" \
+            --verify-tag \
+            --notes "Release notes: https://pkl-lang.org/spring/current/changelog.html#release-${CIRCLE_TAG}" \
+            --repo "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}"
+    docker:
+    - image: maniator/gh:v2.40.1
+  trigger-docsite-build:
+    steps:
+    - run:
+        command: |-
+          curl --location \
+            --request POST \
+            --header "Content-Type: application/json" \
+            -u "${CIRCLE_TOKEN}:" \
+            --data '{ "branch": "main" }' \
+            "https://circleci.com/api/v2/project/github/apple/pkl-lang.org/pipeline"
+        name: Triggering docsite build
+    docker:
+    - image: cimg/openjdk:11.0
+    - image: cimg/base:current
+workflows:
+  prb:
+    jobs:
+    - hold:
+        type: approval
+    - pr-approval/authenticate:
+        context: pkl-pr-approval
+    - build:
+        requires:
+        - hold
+        - pr-approval/authenticate
+    when:
+      matches:
+        value: << pipeline.git.branch >>
+        pattern: ^pull/\d+(/head)?$
+  main:
+    jobs:
+    - deploy-snapshot:
+        context:
+        - pkl-maven-release
+    when:
+      equal:
+      - main
+      - << pipeline.git.branch >>
+  release:
+    jobs:
+    - deploy-release:
+        context:
+        - pkl-maven-release
+        filters:
+          branches:
+            ignore: /.*/
+          tags:
+            only: /^v?\d+\.\d+\.\d+$/
+    - github-release:
+        requires:
+        - deploy-release
+        context:
+        - pkl-github-release
+        filters:
+          branches:
+            ignore: /.*/
+          tags:
+            only: /^v?\d+\.\d+\.\d+$/
+    - trigger-docsite-build:
+        requires:
+        - github-release
+        context:
+        - pkl-pr-approval
+        filters:
+          branches:
+            ignore: /.*/
+          tags:
+            only: /^v?\d+\.\d+\.\d+$/

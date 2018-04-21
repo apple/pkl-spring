@@ -1,0 +1,14 @@
+// this module name determines the package and
+// class name of the generated Kotlin config class
+module samples.kotlin.AppConfig
+
+server: Server
+
+class Server {
+  endpoints: Listing<Endpoint>
+}
+
+class Endpoint {
+  name: String
+  port: UInt16
+}

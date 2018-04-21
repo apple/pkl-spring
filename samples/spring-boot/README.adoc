@@ -1,0 +1,8 @@
+= Spring Boot Example
+:uri-docs: https://pkl-lang.org/spring/current/spring-boot.html
+
+This example demonstrates how to configure a Spring Boot application with Pkl.
+For a walkthrough, see the link:{uri-docs}[documentation].
+
+To run the application, type `../gradlew run`.
+To open the project in IntelliJ IDEA, go to File->Open and select the `samples` directory.
