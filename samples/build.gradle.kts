@@ -6,7 +6,7 @@ plugins {
 
 idea {
   project {
-    languageLevel = IdeaLanguageLevel("11")
-    jdkName = "11"
+    languageLevel = IdeaLanguageLevel("17")
+    jdkName = "17"
   }
 }

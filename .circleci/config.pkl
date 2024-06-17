@@ -13,12 +13,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //===----------------------------------------------------------------------===//
-amends ".../pkl-project-commons/packages/pkl.impl.circleci/PklCI.pkl"
+amends "package://pkg.pkl-lang.org/pkl-project-commons/pkl.impl.circleci@1.1.1#/PklCI.pkl"
 
 jobs {
   default {
     docker {
-      new { image = "cimg/openjdk:11.0" }
+      new { image = "cimg/openjdk:17.0" }
     }
   }
   ["build"] {

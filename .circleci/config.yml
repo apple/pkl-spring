@@ -10,21 +10,21 @@ jobs:
         command: ./gradlew build
         name: Building
     docker:
-    - image: cimg/openjdk:11.0
+    - image: cimg/openjdk:17.0
   deploy-release:
     steps:
     - checkout
     - run:
         command: ./gradlew -DreleaseBuild=true publishToSonatype closeAndReleaseSonatypeStagingRepository
     docker:
-    - image: cimg/openjdk:11.0
+    - image: cimg/openjdk:17.0
   deploy-snapshot:
     steps:
     - checkout
     - run:
         command: ./gradlew build publishToSonatype
     docker:
-    - image: cimg/openjdk:11.0
+    - image: cimg/openjdk:17.0
   github-release:
     steps:
     - run:
@@ -49,7 +49,7 @@ jobs:
             "https://circleci.com/api/v2/project/github/apple/pkl-lang.org/pipeline"
         name: Triggering docsite build
     docker:
-    - image: cimg/openjdk:11.0
+    - image: cimg/openjdk:17.0
     - image: cimg/base:current
 workflows:
   prb:
@@ -61,7 +61,6 @@ workflows:
     - build:
         requires:
         - hold
-        - pr-approval/authenticate
     when:
       matches:
         value: << pipeline.git.branch >>
