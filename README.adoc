@@ -14,7 +14,7 @@ Continue with {uri-installation}[installation] and {uri-usage}[usage instruction
 
 === Setup
 
-* Install JDK 11
+* Install JDK 17
 * Install the latest IntelliJ IDEA
 ** To import the project into IntelliJ, go to File->Open and select the project's root directory.
 If the project is opened but not imported, look for a popup in the lower right corner

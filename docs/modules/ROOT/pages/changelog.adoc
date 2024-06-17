@@ -1,5 +1,11 @@
 = Changelog
 
+[[release-0.16.0]]
+== 0.16.0 (2024-06-17)
+
+* Update to Pkl 0.26
+* Update to Java 17
+
 [[release-0.15.0]]
 == 0.15.0 (2024-02-01)
 
