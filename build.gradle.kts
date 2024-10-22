@@ -27,8 +27,14 @@ spotless {
     licenseHeaderFile(rootProject.file("buildSrc/src/main/resources/license-header.line-comment.txt"), "/// ")
   }
   java {
-    googleJavaFormat("1.15.0")
-    targetExclude("**/generated/**", "**/build/**")
+    googleJavaFormat(libs.versions.googleJavaFormat.get())
+    target("src/*/java/**/*.java")
+    target("samples/*/src/*/java/**/*.java")
+    licenseHeaderFile(rootProject.file("buildSrc/src/main/resources/license-header.star-block.txt"))
+  }
+  kotlin {
+    ktfmt(libs.versions.ktfmt.get()).googleStyle()
+    target("samples/*/src/*/kotlin/**/*.kt")
     licenseHeaderFile(rootProject.file("buildSrc/src/main/resources/license-header.star-block.txt"))
   }
 }
