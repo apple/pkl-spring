@@ -1,4 +1,3 @@
-import org.gradle.plugins.ide.idea.model.IdeaLanguageLevel
 import java.nio.charset.StandardCharsets
 import java.util.*
 
@@ -6,7 +5,6 @@ import java.util.*
 plugins {
   `java-library`
   `maven-publish`
-  idea
   alias(libs.plugins.pkl)
   alias(libs.plugins.nexusPublish)
   alias(libs.plugins.spotless)
@@ -81,19 +79,9 @@ pkl {
   }
 }
 
-idea {
-  project {
-    languageLevel = IdeaLanguageLevel("11")
-    jdkName = "11"
-  }
-}
-
-tasks.idea {
-  doFirst {
-    throw GradleException(
-        "To open this project in IntelliJ, go to File->Open " +
-            "and select the project's root directory. Do *not* run `./gradlew idea`.")
-  }
+tasks.compileTestJava {
+  // required by Boot 3.x (usually handled by Boot's Gradle plugin)
+  options.compilerArgs = options.compilerArgs + "-parameters"
 }
 
 tasks.jar {

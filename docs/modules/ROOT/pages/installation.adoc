@@ -1,26 +1,54 @@
 = Installation
 
-The _pkl-spring_ library is hosted on Maven Central.
+:uri-pkl-spring-module: https://central.sonatype.com/artifact/org.pkl-lang/pkl-spring
 
-_pkl-spring_ requires Java 17 or higher and Spring Boot 2.2 or higher.
-Note that _pkl-spring_'s POM does not declare a dependency on Spring Boot; this is left to your application.
+The _pkl-spring_ library is available {uri-pkl-spring-module}[from Maven Central].
+It requires Java 17 or later and Spring Boot 2.2 or later.
 
-== Gradle
+[NOTE]
+====
+The _pkl-spring_ POM does not declare a dependency on Spring Boot;
+this is left to your application.
+====
 
-Add this to your _build.gradle_:
+=== Gradle
 
-[source,groovy,subs="+attributes"]
+To use the library in a Gradle project, declare the following dependency:
+
+[tabs]
+====
+Kotlin::
++
+.build.gradle.kts
+[source,kotlin,subs="+attributes"]
 ----
 dependencies {
-  compile "org.pkl-lang:pkl-spring:{page-version}"
+  implementation("org.pkl-lang:pkl-spring:{page-version}")
+}
+
+repositories {
+  mavenCentral()
 }
 ----
 
-See the badges at the top of this page for the current release and latest snapshot version.
+Groovy::
++
+.build.gradle
+[source,groovy,subs="+attributes"]
+----
+dependencies {
+  implementation "org.pkl-lang:pkl-spring:{page-version}"
+}
+
+repositories {
+  mavenCentral()
+}
+----
+====
 
 == Maven
 
-Add this to your _pom.xml_:
+To use the library in a Maven project, declare the following dependency:
 
 [source,xml,subs="+attributes"]
 ----
@@ -32,5 +60,3 @@ Add this to your _pom.xml_:
   </dependency>
 </dependencies>
 ----
-
-See the badges at the top of this page for the current release and latest snapshot version.

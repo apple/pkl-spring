@@ -1,5 +1,3 @@
-enableFeaturePreview("VERSION_CATALOGS")
-
 rootProject.name = "samples"
 
 include("spring-boot")
@@ -8,6 +6,9 @@ include("spring-boot-kotlin")
 includeBuild("../")
 
 pluginManagement {
+  // To develop against a local Pkl build's Pkl Gradle plugin, uncomment the next line.
+  //includeBuild("../../pkl")
+
   repositories {
     mavenCentral()
   }

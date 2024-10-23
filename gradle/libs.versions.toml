@@ -5,17 +5,19 @@
 assertJ = "3.26.3"
 # https://github.com/google/google-java-format/releases/
 googleJavaFormat = "1.24.0"
+# only used in Kotlin sample
 # https://central.sonatype.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8/versions
-kotlin = "1.6.10"
+kotlin = "2.0.21"
 # https://github.com/facebook/ktfmt/releases/
 ktfmt = "0.52"
 # https://central.sonatype.com/artifact/org.junit.jupiter/junit-jupiter/versions
 junit = "5.11.3"
-pkl = "0.26.3"
-# use same version as Boot
-spring = "5.3.31"
+pkl = "0.27.0"
+# only used for testing; use same version as Spring Boot
+# https://central.sonatype.com/artifact/org.springframework.boot/spring-boot/dependencies
+spring = "6.1.13"
 # https://central.sonatype.com/artifact/org.springframework.boot/spring-boot/versions
-springBoot = "2.7.18"
+springBoot = "3.3.4"
 # https://github.com/diffplug/spotless/releases
 spotlessPlugin = "6.25.0"
 # https://github.com/gradle-nexus/publish-plugin/releases/
@@ -40,3 +42,4 @@ kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 pkl = { id = "org.pkl-lang", version.ref = "pkl" }
 nexusPublish = { id = "io.github.gradle-nexus.publish-plugin", version.ref = "nexusPublishPlugin" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotlessPlugin" }
+springBoot = { id = "org.springframework.boot", version.ref = "springBoot" }
