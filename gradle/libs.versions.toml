@@ -1,19 +1,25 @@
 # Note: This version catalog is used both for main and samples build.
 
 [versions]
-# https://search.maven.org/search?q=g:org.assertj%20AND%20a:assertj-core
-assertJ = "3.22.0"
-# https://search.maven.org/search?q=g:org.jetbrains.kotlin%20AND%20a:kotlin-stdlib-jdk8
+# https://central.sonatype.com/artifact/org.assertj/assertj-core/versions
+assertJ = "3.26.3"
+# https://github.com/google/google-java-format/releases/
+googleJavaFormat = "1.24.0"
+# https://central.sonatype.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8/versions
 kotlin = "1.6.10"
-# https://search.maven.org/search?q=g:org.junit.jupiter%20AND%20a:junit-jupiter
-junit = "5.8.2"
-pkl = "0.26.0"
+# https://github.com/facebook/ktfmt/releases/
+ktfmt = "0.52"
+# https://central.sonatype.com/artifact/org.junit.jupiter/junit-jupiter/versions
+junit = "5.11.3"
+pkl = "0.26.3"
 # use same version as Boot
-spring = "5.3.15"
-# https://search.maven.org/search?q=g:org.springframework.boot%20AND%20a:spring-boot
-springBoot = "2.7.2"
-spotlessPlugin = "6.11.0"
-nexusPublishPlugin = "1.3.0"
+spring = "5.3.31"
+# https://central.sonatype.com/artifact/org.springframework.boot/spring-boot/versions
+springBoot = "2.7.18"
+# https://github.com/diffplug/spotless/releases
+spotlessPlugin = "6.25.0"
+# https://github.com/gradle-nexus/publish-plugin/releases/
+nexusPublishPlugin = "2.0.0"
 
 [libraries]
 assertJ = { group = "org.assertj", name = "assertj-core", version.ref = "assertJ" }
