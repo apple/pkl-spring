@@ -17,7 +17,11 @@ private val isReleaseBuild = System.getProperty("releaseBuild") != null
 
 version = if (isReleaseBuild) version else "$version-SNAPSHOT"
 
+val originalRemoteName = System.getenv("PKL_ORIGINAL_REMOTE_NAME") ?: "origin"
+
 spotless {
+  ratchetFrom = "$originalRemoteName/main"
+
   format("pkl") {
     target("*.pkl")
     licenseHeaderFile(rootProject.file("buildSrc/src/main/resources/license-header.line-comment.txt"), "/// ")
