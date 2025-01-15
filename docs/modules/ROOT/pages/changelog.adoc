@@ -1,5 +1,30 @@
 = Changelog
 
+[[release-0.17.0]]
+== 0.17.0 (TBD)
+
+* Update to Pkl 0.27.0
+* Update samples to Spring Boot 3.x
+
+[NOTE]
+====
+Starting with Pkl 0.27, Pkl's Java and Kotlin code generators target Spring Boot 3.
+
+To use _pkl-spring_ with Spring Boot 3, the following requirements must be met:
+
+* Config classes are generated with Pkl 0.27 or later.
+  Typically, this is done by using version 0.27.0 or later of Pkl's Gradle plugin.
+* (Java) Config classes are compiled with the `-parameters` compiler argument.
+  Spring Boot's Gradle plugin handles this automatically.
+* (Kotlin) Config classes are compiled with the `-java-parameters` compiler argument.
+  Spring Boot's Gradle plugin handles this automatically.
+
+To use _pkl-spring_ with Spring Boot 2, the following requirements must be met:
+
+* Config classes are generated with Pkl 0.26 or earlier.
+  Typically, this is done by using version 0.26.3 or earlier of Pkl's Gradle plugin.
+====
+
 [[release-0.16.0]]
 == 0.16.0 (2024-06-17)
 
@@ -10,3 +35,4 @@
 == 0.15.0 (2024-02-01)
 
 Initial library release
+

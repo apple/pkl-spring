@@ -1,8 +1,7 @@
 plugins {
-  application
-  idea
   alias(libs.plugins.pkl)
   alias(libs.plugins.kotlin)
+  alias(libs.plugins.springBoot)
 }
 
 dependencies {
@@ -27,10 +26,6 @@ pkl {
   }
 }
 
-application {
-  mainClass.set("samples.kotlin.Application")
-}
-
 tasks.check {
-  dependsOn(tasks.named("run"))
+  dependsOn(tasks.named("bootRun"))
 }

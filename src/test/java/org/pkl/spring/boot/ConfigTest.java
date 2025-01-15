@@ -18,7 +18,6 @@ package org.pkl.spring.boot;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.*;
-import java.util.regex.Pattern;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.pkl.core.*;
@@ -100,10 +99,8 @@ public class ConfigTest {
 
   @Test
   public void consumeRegexProperty() {
-    assertThatThrownBy(() -> environment.getRequiredProperty("regex"))
-        .isInstanceOf(ConverterNotFoundException.class);
-    assertThat(environment.getRequiredProperty("regex", Pattern.class).pattern())
-        .isEqualTo("regex");
+    // Boot 3 no longer requires `getRequiredType("regex", Pattern.class)`
+    assertThat(environment.getRequiredProperty("regex")).isEqualTo("regex");
   }
 
   @Test

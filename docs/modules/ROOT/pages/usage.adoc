@@ -65,8 +65,26 @@ server {
 
 . Use Pkl's xref:main:pkl-gradle:index.adoc[Gradle plugin] to generate Java config classes from the schema.
 Generated classes are placed in `generated/configClasses/` and compiled together with your production code.
-To run the generator directly (which isn't typically necessary), type `./gradlew configClasses`.
+To run the generator directly (which isn't typically necessary), run command `./gradlew configClasses`.
++
+[NOTE]
+====
+This example uses Spring Boot 3.
 
+To use _pkl-spring_ with Spring Boot 3, the following requirements must be met:
+
+* Config classes are generated with Pkl 0.27.0 or later.
+  Typically, this is done by using version 0.27.0 or later of Pkl's Gradle plugin.
+* (Java) Config classes are compiled with the `-parameters` compiler argument.
+  Spring Boot's Gradle plugin handles this automatically.
+* (Kotlin) Config classes are compiled with the `-java-parameters` compiler argument.
+  Spring Boot's Gradle plugin handles this automatically.
+
+To use _pkl-spring_ with Spring Boot 2, the following requirements must be met:
+
+* Config classes are generated with Pkl 0.26 or earlier.
+  Typically, this is done by using version 0.26.x or earlier of Pkl's Gradle plugin.
+====
 +
 [tabs]
 ====
