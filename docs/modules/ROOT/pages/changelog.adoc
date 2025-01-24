@@ -5,8 +5,8 @@
 
 === Changes
 
-* Update to Pkl 0.27.0
-* Update samples to Spring Boot 3.x
+* Update to Pkl 0.27.0 (https://github.com/apple/pkl-spring/pull/6[#6]).
+* Update samples to Spring Boot 3.x (https://github.com/apple/pkl-spring/pull/6[#6]).
 
 [NOTE]
 ====
