@@ -90,19 +90,19 @@ main {
 release {
   jobs {
     new {
-      ["deploy-release"] {
+      ["github-release"] {
         context {
-          "pkl-maven-release"
+          "pkl-github-release"
         }
       }
     }
     new {
-      ["github-release"] {
-        requires {
-          "deploy-release"
-        }
+      ["deploy-release"] {
         context {
-          "pkl-github-release"
+          "pkl-maven-release"
+        }
+        requires {
+          "github-release"
         }
       }
     }

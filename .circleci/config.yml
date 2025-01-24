@@ -76,17 +76,7 @@ workflows:
       - << pipeline.git.branch >>
   release:
     jobs:
-    - deploy-release:
-        context:
-        - pkl-maven-release
-        filters:
-          branches:
-            ignore: /.*/
-          tags:
-            only: /^v?\d+\.\d+\.\d+$/
     - github-release:
-        requires:
-        - deploy-release
         context:
         - pkl-github-release
         filters:
@@ -94,9 +84,19 @@ workflows:
             ignore: /.*/
           tags:
             only: /^v?\d+\.\d+\.\d+$/
-    - trigger-docsite-build:
+    - deploy-release:
         requires:
         - github-release
+        context:
+        - pkl-maven-release
+        filters:
+          branches:
+            ignore: /.*/
+          tags:
+            only: /^v?\d+\.\d+\.\d+$/
+    - trigger-docsite-build:
+        requires:
+        - deploy-release
         context:
         - pkl-pr-approval
         filters:
