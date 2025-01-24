@@ -1,10 +1,12 @@
 = Changelog
 
 [[release-0.17.0]]
-== 0.17.0 (TBD)
+== 0.17.0 (2025-01-24)
 
-* Update to Pkl 0.27.0
-* Update samples to Spring Boot 3.x
+=== Changes
+
+* Update to Pkl 0.27.0 (https://github.com/apple/pkl-spring/pull/6[#6]).
+* Update samples to Spring Boot 3.x (https://github.com/apple/pkl-spring/pull/6[#6]).
 
 [NOTE]
 ====
@@ -24,6 +26,12 @@ To use _pkl-spring_ with Spring Boot 2, the following requirements must be met:
 * Config classes are generated with Pkl 0.26 or earlier.
   Typically, this is done by using version 0.26.3 or earlier of Pkl's Gradle plugin.
 ====
+
+=== Contributors ❤️
+
+Thank you to all our contributors!
+
+* https://github.com/odenix[@odenix]
 
 [[release-0.16.0]]
 == 0.16.0 (2024-06-17)
