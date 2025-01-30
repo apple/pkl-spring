@@ -23,7 +23,7 @@ pkl {
     register("configClasses") {
       generateGetters.set(true)
       generateSpringBootConfig.set(true)
-      sourceModules.set(files("src/main/resources/AppConfig.pkl"))
+      sourceModules.set(files("src/main/resources/AppConfig.pkl", "appConfigExternal.pkl"))
     }
   }
 }

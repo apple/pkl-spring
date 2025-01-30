@@ -1,0 +1,15 @@
+// this module name determines the package and
+// class name of the generated Java config class
+module samples.boot.AppConfigExternal
+
+server2: Server
+
+class Server {
+  endpoints: Listing<Endpoint>
+}
+
+class Endpoint {
+  name: String
+  port: UInt16
+  externalConfig: Boolean = true
+}

@@ -35,6 +35,7 @@ public class Application {
     return args -> {
       var server = ctx.getBean(Server.class);
       System.out.println(server.getConfig());
+      System.out.println(server.getExternalConfig());
     };
   }
 }

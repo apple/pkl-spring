@@ -23,50 +23,51 @@ import org.springframework.boot.env.PropertySourceLoader;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.Resource;
-import org.springframework.util.StreamUtils;
 
 public class PklPropertySourceLoader implements PropertySourceLoader {
+
   @Override
   public String[] getFileExtensions() {
     return new String[] {"pkl", "pcf"};
   }
 
   @Override
-  public List<PropertySource<?>> load(String propertySourceName, Resource resource)
+  public List<PropertySource<?>> load(final String propertySourceName, final Resource resource)
       throws IOException {
-    var text = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
+    final var text = resource.getContentAsString(StandardCharsets.UTF_8);
 
-    PModule module;
-    try (var evaluator = EvaluatorBuilder.preconfigured().build()) {
-      module = evaluator.evaluate(ModuleSource.create(resource.getURI(), text));
+    final PModule module;
+    try (final var evaluator = EvaluatorBuilder.preconfigured().build()) {
+      final var uri =
+          resource.isFile() ? resource.getFile().getCanonicalFile().toURI() : resource.getURI();
+      module = evaluator.evaluate(ModuleSource.create(uri, text));
     }
 
-    var result = new LinkedHashMap<String, Object>();
+    final var result = new LinkedHashMap<String, Object>();
     module.getProperties().forEach((name, value) -> flatten(name, value, result));
     return List.of(new MapPropertySource(propertySourceName, result));
   }
 
   private static void flatten(
-      String propertyName, Object propertyValue, Map<String, Object> result) {
-    if (propertyValue instanceof Composite) {
-      flatten(propertyName, ((Composite) propertyValue).getProperties(), result);
-    } else if (propertyValue instanceof Map<?, ?>) {
-      var map = (Map<?, ?>) propertyValue;
+      final String propertyName, final Object propertyValue, final Map<String, Object> result) {
+    if (propertyValue instanceof final Composite composite) {
+      flatten(propertyName, composite.getProperties(), result);
+    } else if (propertyValue instanceof final Map<?, ?> map) {
       if (map.isEmpty()) {
         result.put(propertyName, Collections.emptyMap());
       } else {
         map.forEach((name, value) -> flatten(propertyName + '.' + name, value, result));
       }
-    } else if (propertyValue instanceof Collection) {
-      var collection = (Collection<?>) propertyValue;
+    } else if (propertyValue instanceof final Collection<?> collection) {
       if (collection.isEmpty()) {
         result.put(
             propertyName,
             propertyValue instanceof Set ? Collections.emptySet() : Collections.emptyList());
       } else {
         var index = 0;
-        for (var element : collection) {
-          flatten(propertyName + '[' + index++ + ']', element, result);
+        for (final var element : collection) {
+          flatten(propertyName + '[' + index + ']', element, result);
+          index++;
         }
       }
     } else {

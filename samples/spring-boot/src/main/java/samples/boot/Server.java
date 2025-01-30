@@ -20,12 +20,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class Server {
   private final AppConfig.Server config;
+  private final AppConfigExternal.Server externalConfig;
 
-  public Server(AppConfig.Server config) {
+  public Server(AppConfig.Server config, AppConfigExternal.Server externalConfig) {
     this.config = config;
+    this.externalConfig = externalConfig;
   }
 
   public AppConfig.Server getConfig() {
     return config;
+  }
+
+  public AppConfigExternal.Server getExternalConfig() {
+    return externalConfig;
   }
 }
