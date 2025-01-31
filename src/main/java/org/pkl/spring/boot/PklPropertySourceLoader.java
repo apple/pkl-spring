@@ -23,9 +23,9 @@ import org.springframework.boot.env.PropertySourceLoader;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.Resource;
-import org.springframework.util.StreamUtils;
 
 public class PklPropertySourceLoader implements PropertySourceLoader {
+
   @Override
   public String[] getFileExtensions() {
     return new String[] {"pkl", "pcf"};
@@ -34,11 +34,9 @@ public class PklPropertySourceLoader implements PropertySourceLoader {
   @Override
   public List<PropertySource<?>> load(String propertySourceName, Resource resource)
       throws IOException {
-    var text = StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
-
     PModule module;
     try (var evaluator = EvaluatorBuilder.preconfigured().build()) {
-      module = evaluator.evaluate(ModuleSource.create(resource.getURI(), text));
+      module = evaluator.evaluate(toModuleSource(resource));
     }
 
     var result = new LinkedHashMap<String, Object>();
@@ -46,19 +44,25 @@ public class PklPropertySourceLoader implements PropertySourceLoader {
     return List.of(new MapPropertySource(propertySourceName, result));
   }
 
+  private ModuleSource toModuleSource(Resource resource) throws IOException {
+    if (resource.isFile()) {
+      return ModuleSource.file(resource.getFile());
+    }
+    var text = resource.getContentAsString(StandardCharsets.UTF_8);
+    return ModuleSource.create(resource.getURI(), text);
+  }
+
   private static void flatten(
       String propertyName, Object propertyValue, Map<String, Object> result) {
-    if (propertyValue instanceof Composite) {
-      flatten(propertyName, ((Composite) propertyValue).getProperties(), result);
-    } else if (propertyValue instanceof Map<?, ?>) {
-      var map = (Map<?, ?>) propertyValue;
+    if (propertyValue instanceof Composite composite) {
+      flatten(propertyName, composite.getProperties(), result);
+    } else if (propertyValue instanceof Map<?, ?> map) {
       if (map.isEmpty()) {
         result.put(propertyName, Collections.emptyMap());
       } else {
         map.forEach((name, value) -> flatten(propertyName + '.' + name, value, result));
       }
-    } else if (propertyValue instanceof Collection) {
-      var collection = (Collection<?>) propertyValue;
+    } else if (propertyValue instanceof Collection<?> collection) {
       if (collection.isEmpty()) {
         result.put(
             propertyName,
@@ -66,7 +70,8 @@ public class PklPropertySourceLoader implements PropertySourceLoader {
       } else {
         var index = 0;
         for (var element : collection) {
-          flatten(propertyName + '[' + index++ + ']', element, result);
+          flatten(propertyName + '[' + index + ']', element, result);
+          index++;
         }
       }
     } else {

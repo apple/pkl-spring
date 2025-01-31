@@ -18,6 +18,8 @@ pkl = "0.27.0"
 spring = "6.1.13"
 # https://central.sonatype.com/artifact/org.springframework.boot/spring-boot/versions
 springBoot = "3.3.4"
+# https://central.sonatype.com/artifact/com.github.spotbugs/spotbugs-annotations/versions
+spotbugsAnnotations = "4.9.0"
 # https://github.com/diffplug/spotless/releases
 spotlessPlugin = "6.25.0"
 # https://github.com/gradle-nexus/publish-plugin/releases/
@@ -27,6 +29,7 @@ nexusPublishPlugin = "2.0.0"
 assertJ = { group = "org.assertj", name = "assertj-core", version.ref = "assertJ" }
 junitApi = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junit" }
 junitEngine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junit" }
+junitParams = { group = "org.junit.jupiter", name = "junit-jupiter-params", version.ref = "junit" }
 kotlinStdLib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlin" }
 kotlinReflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
 pklConfigJavaAll = { group = "org.pkl-lang", name = "pkl-config-java-all", version.ref = "pkl" }
@@ -36,6 +39,7 @@ springBoot = { group = "org.springframework.boot", name = "spring-boot", version
 springBootAutoConfigure = { group = "org.springframework.boot", name = "spring-boot-autoconfigure", version.ref = "springBoot" }
 springBootTest = { group = "org.springframework.boot", name = "spring-boot-test", version.ref = "springBoot" }
 springTest = { group = "org.springframework", name = "spring-test", version.ref = "spring" }
+spotbugsAnnotations = { module = "com.github.spotbugs:spotbugs-annotations", version.ref = "spotbugsAnnotations" }
 
 [plugins]
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

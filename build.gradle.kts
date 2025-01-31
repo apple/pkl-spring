@@ -52,6 +52,7 @@ java {
 
 dependencies {
   compileOnly(libs.springBoot)
+  compileOnly(libs.spotbugsAnnotations)
 
   // `api` instead of `implementation`
   // so that users of pkl-spring don't need to add pkl-config-java-all
@@ -63,6 +64,7 @@ dependencies {
   testImplementation(libs.springBootTest)
   testImplementation(libs.springBootAutoConfigure)
   testImplementation(libs.junitApi)
+  testImplementation(libs.junitParams)
   testImplementation(libs.assertJ)
 
   testRuntimeOnly(libs.junitEngine)
