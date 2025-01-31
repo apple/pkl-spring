@@ -1,4 +1,4 @@
-amends ".../AppConfig.pkl"
+amends "AppConfig.pkl"
 
 server {
   endpoints {
