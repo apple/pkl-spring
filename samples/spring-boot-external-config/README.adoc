@@ -1,0 +1,16 @@
+= Spring Boot External Config Example
+:uri-docs: https://pkl-lang.org/spring/current/spring-boot.html
+
+This example demonstrates how to configure a Spring Boot application when the configuration files are placed _outside_ of the resources directory.
+
+The link:src/main/resources/application.properties[resources/application.properties] file is a
+typical Spring Boot config file importing link:config/application.pkl[config/application.pkl] from
+external location.
+
+Note the use of `amends "AppConfig.pkl"` in link:config/application.pkl[config/application.pkl]
+which not only allows for the validation but also for the IDE code completion!
+
+For a walkthrough, see the link:{uri-docs}[documentation].
+
+To run the application, type `../gradlew run`.
+To open the project in IntelliJ IDEA, go to File->Open and select the `samples` directory.
