@@ -32,40 +32,44 @@ public class PklPropertySourceLoader implements PropertySourceLoader {
   }
 
   @Override
-  public List<PropertySource<?>> load(final String propertySourceName, final Resource resource)
+  public List<PropertySource<?>> load(String propertySourceName, Resource resource)
       throws IOException {
-    final var text = resource.getContentAsString(StandardCharsets.UTF_8);
-
-    final PModule module;
-    try (final var evaluator = EvaluatorBuilder.preconfigured().build()) {
-      final var uri =
-          resource.isFile() ? resource.getFile().getCanonicalFile().toURI() : resource.getURI();
-      module = evaluator.evaluate(ModuleSource.create(uri, text));
+    PModule module;
+    try (var evaluator = EvaluatorBuilder.preconfigured().build()) {
+      module = evaluator.evaluate(toModuleSource(resource));
     }
 
-    final var result = new LinkedHashMap<String, Object>();
+    var result = new LinkedHashMap<String, Object>();
     module.getProperties().forEach((name, value) -> flatten(name, value, result));
     return List.of(new MapPropertySource(propertySourceName, result));
   }
 
+  private ModuleSource toModuleSource(Resource resource) throws IOException {
+    if (resource.isFile()) {
+      return ModuleSource.file(resource.getFile());
+    }
+    var text = resource.getContentAsString(StandardCharsets.UTF_8);
+    return ModuleSource.create(resource.getURI(), text);
+  }
+
   private static void flatten(
-      final String propertyName, final Object propertyValue, final Map<String, Object> result) {
-    if (propertyValue instanceof final Composite composite) {
+      String propertyName, Object propertyValue, Map<String, Object> result) {
+    if (propertyValue instanceof Composite composite) {
       flatten(propertyName, composite.getProperties(), result);
-    } else if (propertyValue instanceof final Map<?, ?> map) {
+    } else if (propertyValue instanceof Map<?, ?> map) {
       if (map.isEmpty()) {
         result.put(propertyName, Collections.emptyMap());
       } else {
         map.forEach((name, value) -> flatten(propertyName + '.' + name, value, result));
       }
-    } else if (propertyValue instanceof final Collection<?> collection) {
+    } else if (propertyValue instanceof Collection<?> collection) {
       if (collection.isEmpty()) {
         result.put(
             propertyName,
             propertyValue instanceof Set ? Collections.emptySet() : Collections.emptyList());
       } else {
         var index = 0;
-        for (final var element : collection) {
+        for (var element : collection) {
           flatten(propertyName + '[' + index + ']', element, result);
           index++;
         }

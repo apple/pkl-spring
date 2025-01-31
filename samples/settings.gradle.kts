@@ -2,6 +2,7 @@ rootProject.name = "samples"
 
 include("spring-boot")
 include("spring-boot-kotlin")
+include("spring-boot-external-config")
 
 includeBuild("../")
 

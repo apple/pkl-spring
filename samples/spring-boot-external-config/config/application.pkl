@@ -1,6 +1,6 @@
-amends ".../AppConfigExternal.pkl"
+amends ".../AppConfig.pkl"
 
-server2 {
+server {
   endpoints {
     new {
       name = "endpoint1"
@@ -9,7 +9,6 @@ server2 {
     new {
       name = "endpoint2"
       port = 5678
-      externalConfig = false
     }
   }
 }
