@@ -1,5 +1,19 @@
 = Changelog
 
+[[release-0.17.1]]
+== 0.17.1 (2025-02-10)
+
+=== Fixes
+
+* Fix a memory leak when loading a Pkl module (https://github.com/apple/pkl-spring/pull/11[#11]).
+* Fix an issue when loading a file-based config source (https://github.com/apple/pkl-spring/pull/11[#11]).
+
+=== Contributors ❤️
+
+Thank you to all our contributors!
+
+* https://github.com/protobufel2[@protobufel2]
+
 [[release-0.17.0]]
 == 0.17.0 (2025-01-24)
 
