@@ -36,6 +36,8 @@ pklConfigJavaAll = { group = "org.pkl-lang", name = "pkl-config-java-all", versi
 pklSpring = { group = "org.pkl-lang", name = "pkl-spring", version.ref = "pkl" }
 spotlessPlugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotlessPlugin"}
 springBoot = { group = "org.springframework.boot", name = "spring-boot", version.ref = "springBoot" }
+
+springBootAutoconfigureProcessor = { group = "org.springframework.boot", name = "spring-boot-autoconfigure-processor", version.ref = "springBoot" }
 springBootAutoConfigure = { group = "org.springframework.boot", name = "spring-boot-autoconfigure", version.ref = "springBoot" }
 springBootTest = { group = "org.springframework.boot", name = "spring-boot-test", version.ref = "springBoot" }
 springTest = { group = "org.springframework", name = "spring-test", version.ref = "spring" }
