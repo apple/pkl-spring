@@ -11,7 +11,7 @@ The _pkl-spring_ POM does not declare a dependency on Spring Boot;
 this is left to your application.
 ====
 
-=== Gradle
+== Gradle
 
 To use the library in a Gradle project, declare the following dependency:
 
