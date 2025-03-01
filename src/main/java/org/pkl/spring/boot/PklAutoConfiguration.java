@@ -17,15 +17,15 @@ package org.pkl.spring.boot;
 
 import java.util.*;
 import org.pkl.core.PNull;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.core.convert.converter.GenericConverter;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
-@Configuration
+@AutoConfiguration
 public class PklAutoConfiguration {
   public PklAutoConfiguration(ConfigurableEnvironment env) {
     // otherwise `Environment.getProperty("pklPropertyWithNullValue")` fails with

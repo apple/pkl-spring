@@ -54,6 +54,9 @@ dependencies {
   compileOnly(libs.springBoot)
   compileOnly(libs.spotbugsAnnotations)
 
+  annotationProcessor(libs.springBootAutoconfigureProcessor)
+  compileOnly(libs.springBootAutoConfigure)
+
   // `api` instead of `implementation`
   // so that users of pkl-spring don't need to add pkl-config-java-all
   // to be able to compile their generated config classes
