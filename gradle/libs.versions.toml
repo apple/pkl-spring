@@ -15,9 +15,9 @@ junit = "5.11.3"
 pkl = "0.27.0"
 # only used for testing; use same version as Spring Boot
 # https://central.sonatype.com/artifact/org.springframework.boot/spring-boot/dependencies
-spring = "6.1.13"
+spring = "6.2.11"
 # https://central.sonatype.com/artifact/org.springframework.boot/spring-boot/versions
-springBoot = "3.3.4"
+springBoot = "3.5.6"
 # https://central.sonatype.com/artifact/com.github.spotbugs/spotbugs-annotations/versions
 spotbugsAnnotations = "4.9.0"
 # https://github.com/diffplug/spotless/releases
@@ -36,6 +36,8 @@ pklConfigJavaAll = { group = "org.pkl-lang", name = "pkl-config-java-all", versi
 pklSpring = { group = "org.pkl-lang", name = "pkl-spring", version.ref = "pkl" }
 spotlessPlugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotlessPlugin"}
 springBoot = { group = "org.springframework.boot", name = "spring-boot", version.ref = "springBoot" }
+
+springBootAutoconfigureProcessor = { group = "org.springframework.boot", name = "spring-boot-autoconfigure-processor", version.ref = "springBoot" }
 springBootAutoConfigure = { group = "org.springframework.boot", name = "spring-boot-autoconfigure", version.ref = "springBoot" }
 springBootTest = { group = "org.springframework.boot", name = "spring-boot-test", version.ref = "springBoot" }
 springTest = { group = "org.springframework", name = "spring-test", version.ref = "spring" }
