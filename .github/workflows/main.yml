@@ -17,6 +17,7 @@ jobs:
   deploy-snapshot:
     name: Build and deploy snapshot
     runs-on: ubuntu-latest
+    environment: maven-release
     steps:
     - uses: actions/checkout@v5
       with:

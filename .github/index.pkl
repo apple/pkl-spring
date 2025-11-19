@@ -48,6 +48,7 @@ main = new {
     ["deploy-snapshot"] {
       name = "Build and deploy snapshot"
       `runs-on` = "ubuntu-latest"
+      environment = "maven-release"
       steps = (setupSteps) {
         new Workflow.Step {
           name = "Publish"
@@ -88,6 +89,7 @@ release = new {
     ["release-to-maven"] {
       name = "Release to maven"
       `runs-on` = "ubuntu-latest"
+      environment = "maven-release"
       needs = "release-to-github"
       steps = (setupSteps) {
         new Workflow.Step {
