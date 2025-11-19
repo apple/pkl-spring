@@ -30,7 +30,7 @@ jobs:
           --title "${{ github.ref_name }}" \
           --target "${{ github.sha }}" \
           --verify-tag \
-          --notes "Release notes: https://pkl-lang.org/spring/current/changelog.html#release-${{ github.ref_name }}" \
+          --notes "Release notes: https://pkl-lang.org/spring/current/changelog.html#release-${{ github.ref_name }}"
   release-to-maven:
     name: Release to maven
     needs: release-to-github
