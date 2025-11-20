@@ -1,0 +1,38 @@
+# Do not modify!
+# This file was generated from a template using https://github.com/StefMa/pkl-gha
+
+name: Build (main)
+'on':
+  push:
+    branches:
+    - main
+    tags-ignore:
+    - '**'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  deploy-snapshot:
+    name: Build and deploy snapshot
+    runs-on: ubuntu-latest
+    environment: maven-release
+    steps:
+    - uses: actions/checkout@v5
+      with:
+        fetch-depth: 0
+    - name: Setup Java
+      uses: actions/setup-java@v5
+      with:
+        java-version: '21'
+        distribution: temurin
+        cache: gradle
+    - name: Publish
+      env:
+        ORG_GRADLE_PROJECT_signingKeyId: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGKEYID }}
+        ORG_GRADLE_PROJECT_signingKey: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGKEY }}
+        ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGPASSWORD }}
+        ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.ORG_GRADLE_PROJECT_SONATYPEPASSWORD }}
+        ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.ORG_GRADLE_PROJECT_SONATYPEUSERNAME }}
+      run: ./gradlew build publishToSonatype

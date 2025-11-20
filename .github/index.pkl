@@ -1,0 +1,119 @@
+//===----------------------------------------------------------------------===//
+// Copyright © 2025 Apple Inc. and the Pkl project authors. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//   https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//===----------------------------------------------------------------------===//
+
+amends "@pkl.impl.ghactions/PklCI.pkl"
+
+import "@gha/actions/Common.pkl"
+import "@gha/actions/Setup.pkl"
+import "@gha/Context.pkl"
+import "@gha/Workflow.pkl"
+import "@pkl.impl.ghactions/helpers.pkl"
+
+triggerDocsBuild = "release"
+
+build = new {
+  jobs {
+    ["build-and-test"] {
+      name = "Build and test"
+      `runs-on` = "ubuntu-latest"
+      steps = (setupSteps) {
+        new {
+          name = "Build and test"
+          run = "./gradlew build"
+        }
+      }
+    }
+  }
+}
+
+prb = build
+
+releaseBranch = build
+
+main = new {
+  jobs {
+    ["deploy-snapshot"] {
+      name = "Build and deploy snapshot"
+      `runs-on` = "ubuntu-latest"
+      environment = "maven-release"
+      steps = (setupSteps) {
+        new Workflow.Step {
+          name = "Publish"
+          run = "./gradlew build publishToSonatype"
+        } |> helpers.withMavenPublishSecrets
+      }
+    }
+  }
+}
+
+release = new {
+  jobs {
+    ["release-to-github"] {
+      name = "Release to GitHub"
+      `runs-on` = "ubuntu-latest"
+      permissions {
+        contents = "write"
+      }
+      steps {
+        new Common.Checkout {}
+        new {
+          name = "Create release"
+          env {
+            ["GH_TOKEN"] = Context.github.token
+            ["GH_REPO"] = Context.github.repository
+          }
+          run =
+            #"""
+            gh release create "\#(Context.github.refName)" \
+              --title "\#(Context.github.refName)" \
+              --target "\#(Context.github.sha)" \
+              --verify-tag \
+              --notes "Release notes: https://pkl-lang.org/spring/current/changelog.html#release-\#(Context.github.refName)"
+            """#
+        }
+      }
+    }
+    ["release-to-maven"] {
+      name = "Release to maven"
+      `runs-on` = "ubuntu-latest"
+      environment = "maven-release"
+      needs = "release-to-github"
+      steps = (setupSteps) {
+        new Workflow.Step {
+          name = "Deploy to maven"
+          run =
+            "./gradlew -DreleaseBuild=true build publishToSonatype closeAndReleaseSonatypeStagingRepository"
+        } |> helpers.withMavenPublishSecrets
+      }
+    }
+  }
+}
+
+local setupSteps: Listing<*Workflow.Step | Workflow.TypedStep> = new {
+  new Common.Checkout {
+    with {
+      `fetch-depth` = 0
+    }
+  }
+  new Setup.Java {
+    name = "Setup Java"
+    with {
+      distribution = "temurin"
+      `java-version` = "21"
+      cache = "gradle"
+    }
+  }
+}
