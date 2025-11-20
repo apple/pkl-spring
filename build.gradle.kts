@@ -151,8 +151,8 @@ publishing {
           url.set("https://github.com/apple/pkl-spring/issues")
         }
         ciManagement {
-          system.set("Circle CI")
-          url.set("https://app.circleci.com/pipelines/github/apple/pkl-spring")
+          system.set("GitHub Actions")
+          url.set("https://github.com/apple/pkl-spring/actions")
         }
       }
     }
