@@ -11,3 +11,6 @@ generated
 !.idea/codestyles/
 !.idea/inspectionProfiles/
 !.idea/vcs.xml
+
+# Pkl LSP
+.pkl-lsp/
