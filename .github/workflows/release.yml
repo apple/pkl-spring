@@ -46,7 +46,6 @@ jobs:
       with:
         java-version: '21'
         distribution: temurin
-        cache: gradle
     - name: Deploy to maven
       env:
         ORG_GRADLE_PROJECT_signingKeyId: ${{ secrets.ORG_GRADLE_PROJECT_SIGNINGKEYID }}

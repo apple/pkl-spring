@@ -90,7 +90,7 @@ release = new {
       `runs-on` = "ubuntu-latest"
       environment = "maven-release"
       needs = "release-to-github"
-      steps = (setupSteps) {
+      steps = (setupStepsCache(null)) {
         new Workflow.Step {
           name = "Deploy to maven"
           run =
@@ -101,7 +101,9 @@ release = new {
   }
 }
 
-local setupSteps: Listing<Workflow.Step> = new {
+local setupSteps = setupStepsCache("gradle")
+
+local function setupStepsCache(jcache: ("maven"|"gradle"|"sbt")?): Listing<Workflow.Step> = new {
   (catalog.`actions/checkout@v6`) {
     with {
       `fetch-depth` = 0
@@ -112,7 +114,7 @@ local setupSteps: Listing<Workflow.Step> = new {
     with {
       distribution = "temurin"
       `java-version` = "21"
-      cache = "gradle"
+      cache = jcache
     }
   }
 }
