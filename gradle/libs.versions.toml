@@ -12,6 +12,7 @@ kotlin = "2.0.21"
 ktfmt = "0.52"
 # https://central.sonatype.com/artifact/org.junit.jupiter/junit-jupiter/versions
 junit = "5.11.3"
+junitPlatform = "1.+"
 pkl = "0.27.0"
 # only used for testing; use same version as Spring Boot
 # https://central.sonatype.com/artifact/org.springframework.boot/spring-boot/dependencies
@@ -30,6 +31,7 @@ assertJ = { group = "org.assertj", name = "assertj-core", version.ref = "assertJ
 junitApi = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junit" }
 junitEngine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junit" }
 junitParams = { group = "org.junit.jupiter", name = "junit-jupiter-params", version.ref = "junit" }
+junitLauncher = { group = "org.junit.platform", name = "junit-platform-launcher", version.ref = "junitPlatform" }
 kotlinStdLib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlin" }
 kotlinReflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
 pklConfigJavaAll = { group = "org.pkl-lang", name = "pkl-config-java-all", version.ref = "pkl" }

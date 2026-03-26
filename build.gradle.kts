@@ -71,6 +71,7 @@ dependencies {
   testImplementation(libs.assertJ)
 
   testRuntimeOnly(libs.junitEngine)
+  testRuntimeOnly(libs.junitLauncher)
 }
 
 pkl {
