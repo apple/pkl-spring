@@ -1,7 +1,17 @@
 = Changelog
 
 [[release-0.18.0]]
-== 0.18.0 (UNRELEASED)
+== 0.18.0 (2026-03-31)
+
+=== Changes
+
+* Update to Pkl 0.31.1 (https://github.com/apple/pkl-spring/pull/34[#34]).
+
+=== Contributors ❤️
+
+Thank you to all our contributors!
+
+* https://github.com/stackoverflow[@stackoverflow]
 
 [[release-0.17.1]]
 == 0.17.1 (2025-02-10)
