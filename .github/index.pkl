@@ -118,3 +118,30 @@ local function setupStepsCache(jcache: ("maven"|"gradle"|"sbt")?): Listing<Workf
     }
   }
 }
+
+dependabot {
+  updates {
+    new {
+      `package-ecosystem` = "gradle"
+      directory = "/"
+      schedule {
+        interval = "weekly"
+      }
+      cooldown {
+        `default-days` = 7
+        exclude {
+          "org.pkl-lang:*"
+        }
+      }
+    }
+  }
+}
+
+codeql {
+  scans {
+    new {
+      language = "java-kotlin"
+      buildMode = "autobuild"
+    }
+  }
+}

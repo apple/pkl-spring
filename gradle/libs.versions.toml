@@ -2,7 +2,7 @@
 
 [versions]
 # https://central.sonatype.com/artifact/org.assertj/assertj-core/versions
-assertJ = "3.26.3"
+assertJ = "3.27.7"
 # https://github.com/google/google-java-format/releases/
 googleJavaFormat = "1.35.0"
 # only used in Kotlin sample
@@ -12,7 +12,7 @@ kotlin = "2.0.21"
 ktfmt = "0.62"
 # https://central.sonatype.com/artifact/org.junit.jupiter/junit-jupiter/versions
 junit = "5.11.3"
-junitPlatform = "1.+"
+junitPlatform = "6.0.3"
 pkl = "0.31.1"
 # only used for testing; use same version as Spring Boot
 # https://central.sonatype.com/artifact/org.springframework.boot/spring-boot/dependencies
