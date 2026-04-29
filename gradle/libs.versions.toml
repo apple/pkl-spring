@@ -11,7 +11,7 @@ kotlin = "2.0.21"
 # https://github.com/facebook/ktfmt/releases/
 ktfmt = "0.62"
 # https://central.sonatype.com/artifact/org.junit.jupiter/junit-jupiter/versions
-junit = "5.11.3"
+junit = "6.0.3"
 junitPlatform = "6.0.3"
 pkl = "0.31.1"
 # only used for testing; use same version as Spring Boot
