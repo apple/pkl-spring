@@ -7,7 +7,7 @@ assertJ = "3.27.7"
 googleJavaFormat = "1.35.0"
 # only used in Kotlin sample
 # https://central.sonatype.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8/versions
-kotlin = "2.0.21"
+kotlin = "2.3.21"
 # https://github.com/facebook/ktfmt/releases/
 ktfmt = "0.62"
 # https://central.sonatype.com/artifact/org.junit.jupiter/junit-jupiter/versions
