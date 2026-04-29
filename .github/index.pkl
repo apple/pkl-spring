@@ -23,7 +23,13 @@ import "@pkl.impl.ghactions/helpers.pkl"
 
 triggerDocsBuild = "release"
 
-build = new {
+testReports {
+  excludeJobs {
+    "dependency-submission"
+  }
+}
+
+build {
   jobs {
     ["build-and-test"] {
       name = "Build and test"
@@ -42,8 +48,22 @@ prb = build
 
 releaseBranch = build
 
-main = new {
+main {
   jobs {
+    ["dependency-submission"] {
+      permissions {
+        contents = "write"
+      }
+      name = "Dependency submission"
+      `runs-on` = "ubuntu-latest"
+      steps = (setupSteps) {
+        (module.catalog.`gradle/actions/dependency-submission@v6`) {
+          with {
+            `dependency-graph-include-configurations` = ".*[rR]untimeClasspath|.*[cC]ompileClasspath"
+          }
+        }
+      }
+    }
     ["deploy-snapshot"] {
       name = "Build and deploy snapshot"
       `runs-on` = "ubuntu-latest"
@@ -58,7 +78,7 @@ main = new {
   }
 }
 
-release = new {
+release {
   jobs {
     ["release-to-github"] {
       name = "Release to GitHub"
