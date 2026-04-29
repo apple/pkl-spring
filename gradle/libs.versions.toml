@@ -20,7 +20,7 @@ spring = "7.0.7"
 # https://central.sonatype.com/artifact/org.springframework.boot/spring-boot/versions
 springBoot = "3.5.6"
 # https://central.sonatype.com/artifact/com.github.spotbugs/spotbugs-annotations/versions
-spotbugsAnnotations = "4.9.0"
+spotbugsAnnotations = "4.9.8"
 # https://github.com/diffplug/spotless/releases
 spotlessPlugin = "8.4.0"
 # https://github.com/gradle-nexus/publish-plugin/releases/
