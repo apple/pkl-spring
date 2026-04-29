@@ -1,7 +1,6 @@
 import java.nio.charset.StandardCharsets
 import java.util.*
 
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
   `java-library`
   `maven-publish`
@@ -9,6 +8,14 @@ plugins {
   alias(libs.plugins.nexusPublish)
   alias(libs.plugins.spotless)
   signing
+}
+
+configurations {
+  all {
+    resolutionStrategy {
+      failOnDynamicVersions()
+    }
+  }
 }
 
 private val isReleaseBuild = System.getProperty("releaseBuild") != null
