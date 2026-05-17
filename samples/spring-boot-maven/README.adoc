@@ -1,0 +1,25 @@
+= Spring Boot Example (Maven)
+:uri-docs: https://pkl-lang.org/spring/current/spring-boot.html
+
+This example demonstrates how to configure a Spring Boot application with Pkl using Maven.
+For a walkthrough of the underlying integration, see the link:{uri-docs}[documentation].
+
+The build invokes Pkl's Java code generator during the `generate-sources` phase via
+`exec-maven-plugin`, then registers the generated directory as an additional source root
+via `build-helper-maven-plugin`. The generated `AppConfig` class is annotated with
+`@ConfigurationProperties` and picked up by Spring Boot at startup.
+
+== Run
+
+[source,shell]
+----
+mvn spring-boot:run
+----
+
+To package the application as an executable jar:
+
+[source,shell]
+----
+mvn package
+java -jar target/spring-boot-maven-1.0.0-SNAPSHOT.jar
+----

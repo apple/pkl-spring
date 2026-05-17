@@ -1,0 +1,14 @@
+amends "AppConfig.pkl"
+
+server {
+  endpoints {
+    new {
+      name = "endpoint1"
+      port = 1234
+    }
+    new {
+      name = "endpoint2"
+      port = 5678
+    }
+  }
+}
