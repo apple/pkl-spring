@@ -143,15 +143,21 @@ dependabot {
   updates {
     new {
       `package-ecosystem` = "gradle"
-      directory = "/"
+      directories {
+        "/"
+        "/samples"
+      }
       schedule {
-        interval = "weekly"
+        interval = "quarterly"
       }
       cooldown {
         `default-days` = 7
         exclude {
-          "org.pkl-lang:*"
+          "org.pkl-lang"
         }
+      }
+      groups {
+        ["all"] { `group-by` = "dependency-name" }
       }
     }
   }
