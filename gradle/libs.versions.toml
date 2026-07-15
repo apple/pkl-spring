@@ -36,7 +36,6 @@ kotlinStdLib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", ve
 kotlinReflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
 pklConfigJavaAll = { group = "org.pkl-lang", name = "pkl-config-java-all", version.ref = "pkl" }
 pklSpring = { group = "org.pkl-lang", name = "pkl-spring", version.ref = "pkl" }
-spotlessPlugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotlessPlugin"}
 springBoot = { group = "org.springframework.boot", name = "spring-boot", version.ref = "springBoot" }
 
 springBootAutoconfigureProcessor = { group = "org.springframework.boot", name = "spring-boot-autoconfigure-processor", version.ref = "springBoot" }
