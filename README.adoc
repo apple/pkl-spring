@@ -1,4 +1,4 @@
-= Pkl Spring Boot Integration image:https://circleci.com/gh/apple/pkl-spring.svg?style=svg["pkl-spring", link="https://circleci.com/gh/apple/pkl-spring"]
+= Pkl Spring Boot Integration
 :uri-docs: https://pkl-lang.org/spring/current
 :uri-installation: {uri-docs}/installation
 :uri-usage: {uri-docs}/usage
